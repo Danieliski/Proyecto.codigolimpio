@@ -1,0 +1,523 @@
+using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+
+public class programa
+{
+
+    class Farmacia
+    {
+        private string id;
+        private string nombre;
+        private string apellido;
+        private DateTime fecha_nacimiento;
+        private string regimen;
+        private int semanas_cotizados;
+        private string fecha_ingreso;
+        private string fecha_ingreso_eps;
+        private string eps;
+        private string historia;
+        private string cantidad_enfermadades;
+        private string enfermedad_relevante;
+        private string tipo_afiliacion;
+        private int costos;
+
+
+        public Farmacia(string id, string nombre, string apellido, DateTime fecha_nacimiento, string regimen, int semanas_cotizados, string fecha_ingreso, string fecha_ingreso_eps, string eps, string historia, string cantidad_enfermadades, string enfermedad_relevante, string tipo_afiliacion, int costos)
+        {
+            this.id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.fecha_nacimiento = fecha_nacimiento;
+            this.regimen = regimen;
+            this.semanas_cotizados = semanas_cotizados;
+            this.fecha_ingreso = fecha_ingreso;
+            this.fecha_ingreso_eps = fecha_ingreso_eps;
+            this.eps = eps;
+            this.historia = historia;
+            this.cantidad_enfermadades = cantidad_enfermadades;
+            this.enfermedad_relevante = enfermedad_relevante;
+            this.tipo_afiliacion = tipo_afiliacion;
+            this.costos = costos;
+        }
+
+        public string Id { get => id; set => id = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Apellido { get => apellido; set => apellido = value; }
+        public DateTime Fecha_nacimiento { get => fecha_nacimiento; set => fecha_nacimiento = value; }
+        public string Regimen { get => regimen; set => regimen = value; }
+        public int Semanas_cotizados { get => semanas_cotizados; set => semanas_cotizados = value; }
+        public string Fecha_ingreso { get => fecha_ingreso; set => fecha_ingreso = value; }
+        public string Fecha_ingreso_eps { get => fecha_ingreso_eps; set => fecha_ingreso_eps = value; }
+        public string Eps { get => eps; set => eps = value; }
+        public string Historia { get => historia; set => historia = value; }
+        public string Cantidad_enfermadades { get => cantidad_enfermadades; set => cantidad_enfermadades = value; }
+        public string Enfermedad_relevante { get => enfermedad_relevante; set => enfermedad_relevante = value; }
+        public string Tipo_afiliacion { get => tipo_afiliacion; set => tipo_afiliacion = value; }
+        public int Costos { get => costos; set => costos = value; }
+
+
+
+        //private List<Farmacia> pacientes;
+
+
+        //this.pacientes = pacientes;
+
+
+
+
+        static void Main(string[] args)
+        {
+            List<Farmacia> pacientes = new List<Farmacia>()
+            {   
+                
+                new Farmacia("12121","Juan","lopez",new DateTime(2015,02,21),"Contributivo",3,"05/10/2010","08/11/2012","eps","nose","4","cancer","cotizante",20000),
+                new Farmacia("42232","Daniel","Arango",new DateTime(2001,09,10),"Contributivo",2,"05/10/2010","10/12/2015","sura","nose","2","gripa","cotizante",1000),
+                new Farmacia("98954","Maria","Gonzales",new DateTime(2003,01,28),"Subsidiado",6,"05/06/2019","10/10/2010","salud total","nose","6","nada","beneficiario",60000),
+                 new Farmacia("35335","Miguel","torres",new DateTime(2002,06,25),"Subsidiado",3,"05/10/2010","08/11/2012","savia","nose","4","cancer","cotizante",100),
+                new Farmacia("45425","David","torres",new DateTime(1976,06,25),"Contributivo",3,"05/10/2010","08/11/2012","sanitas","nose","4","cancer","cotizante",100),
+            };
+
+            static float CaluclarPorcentaje(float a,float b)
+            {
+                float Porcentaje = (a * 100) / b;
+
+                return Porcentaje;
+
+            }
+
+            // Costos y porcentaje de costos
+            static float Mostrar_porcentaje_sura(List<Farmacia> pacientes)
+            {
+                float suma_sura = pacientes.Where(eps => eps.Eps == "sura").Sum(costo => costo.Costos);
+                float total_costos = pacientes.Sum(costo => costo.Costos);
+                float porcentaje_sura = CaluclarPorcentaje(suma_sura, total_costos);
+                return porcentaje_sura;
+
+            }
+            static float Mostrar_porcentaje_eps(List<Farmacia> pacientes)
+            {
+                float suma_eps = pacientes.Where(eps => eps.Eps == "eps").Sum(costo => costo.Costos);
+                float total_costos = pacientes.Sum(costo => costo.Costos);
+                float porcentaje_eps = CaluclarPorcentaje(suma_eps, total_costos);
+                return porcentaje_eps;
+
+            }
+            static float Mostrar_porcentaje_Salud_Total(List<Farmacia> pacientes)
+            {
+                float suma_Salud_Total = pacientes.Where(eps => eps.Eps == "Salud Total").Sum(costo => costo.Costos);
+                float total_costos = pacientes.Sum(costo => costo.Costos);
+                float porcentaje_Salud_Total = CaluclarPorcentaje(suma_Salud_Total, total_costos);
+                return porcentaje_Salud_Total;
+
+            }
+            static float Mostrar_porcentaje_Sanitas(List<Farmacia> pacientes)
+            {
+                float suma_Sanitas = pacientes.Where(eps => eps.Eps == "Sanitas").Sum(costo => costo.Costos);
+                float total_costos = pacientes.Sum(costo => costo.Costos);
+                float porcentaje_Sanitas = CaluclarPorcentaje(suma_Sanitas, total_costos);
+                return porcentaje_Sanitas;
+
+            }
+            static float Mostrar_porcentaje_Savia(List<Farmacia> pacientes)
+            {
+                float suma_Savia = pacientes.Where(eps => eps.Eps == "Savia").Sum(costo => costo.Costos);
+                float total_costos = pacientes.Sum(costo => costo.Costos);
+                float porcentaje_Savia = CaluclarPorcentaje(suma_Savia, total_costos);
+                return porcentaje_Savia;
+
+            }
+
+
+            
+            
+            
+            // Total costos
+            
+            static float Total_sura(List<Farmacia> pacientes)
+            {
+                float suma_sura = pacientes.Where(eps => eps.Eps == "sura").Sum(costo => costo.Costos);
+                
+                return suma_sura;
+
+            }
+            static float Total_eps(List<Farmacia> pacientes)
+            {
+                float suma = pacientes.Where(eps => eps.Eps == "eps").Sum(costo => costo.Costos);
+
+                return suma;
+
+            }
+            static float Total_Salud_Total(List<Farmacia> pacientes)
+            {
+                float suma = pacientes.Where(eps => eps.Eps == "salud total").Sum(costo => costo.Costos);
+
+                return suma;
+
+            }
+            static float Total_Sanitas(List<Farmacia> pacientes)
+            {
+                float suma = pacientes.Where(eps => eps.Eps == "Sanitas").Sum(costo => costo.Costos);
+
+                return suma;
+            }
+            static float Total_Savia(List<Farmacia> pacientes)
+            {
+                float suma = pacientes.Where(eps => eps.Eps == "savia").Sum(costo => costo.Costos);
+
+                return suma;
+            }
+
+            
+            
+            
+            
+            static float Mostrar_porcentaje_sin_enfermedades(List<Farmacia> pacientes)
+            {
+                var total_sin_enfermedades = pacientes.Where(x => x.enfermedad_relevante == "nada").ToList();
+                float Tsin_enfermedades = total_sin_enfermedades.Count();
+
+                var total_beneficiario = pacientes.Count();
+               
+
+                return CaluclarPorcentaje(Tsin_enfermedades, total_beneficiario);
+
+            }
+
+
+              
+
+            // persona con mayor costos
+            static int costo_mayor_sura(List<Farmacia> pacientes)
+            {
+                var MayorCosto_sura = pacientes.Where(costo => costo.Eps == "sura").Max(costo => costo.Costos);
+                return MayorCosto_sura;
+
+            }
+            static int costo_mayor_eps(List<Farmacia> pacientes)
+            {
+                var MayorCosto_eps = pacientes.Where(costo => costo.Eps == "eps").Max(costo => costo.Costos);
+                return MayorCosto_eps;
+
+            }
+            static int costo_mayor_Salud_Total(List<Farmacia> pacientes)
+            {
+                var MayorCosto_Salud_Total = pacientes.Where(costo => costo.Eps == "salud total").Max(costo => costo.Costos);
+                return MayorCosto_Salud_Total;
+
+            }
+            static int costo_mayor_sanitas(List<Farmacia> pacientes)
+            {
+                var MayorCosto_sanitas = pacientes.Where(costo => costo.Eps == "sanitas").Max(costo => costo.Costos);
+                return MayorCosto_sanitas;
+
+            }
+            static int costo_mayor_Savia(List<Farmacia> pacientes)
+            {
+                var MayorCosto_Savia = pacientes.Where(costo => costo.Eps == "savia").Max(costo => costo.Costos);
+                return MayorCosto_Savia;
+
+            }
+
+
+
+            
+
+
+            // porcentaje por edades
+            static float Mostrar_porcentaje_niños(List<Farmacia> pacientes)
+            {
+                DateTime fecha_actual = DateTime.Today;
+                
+                var total_pacientes = pacientes.Count();
+
+                var fechas = pacientes.Where(fecha => (fecha_actual.Year - fecha.fecha_nacimiento.Year) > 0 && (fecha_actual.Year - fecha.fecha_nacimiento.Year)<12).ToList();
+                float porcentaje = CaluclarPorcentaje(fechas.Count(),total_pacientes);
+                return porcentaje;
+
+            }
+            static float Mostrar_porcentaje_adolecentes(List<Farmacia> pacientes)
+            {
+                DateTime fecha_actual = DateTime.Today;
+
+                var total_pacientes = pacientes.Count();
+
+                var fechas = pacientes.Where(fecha => (fecha_actual.Year - fecha.fecha_nacimiento.Year) > 12 && (fecha_actual.Year - fecha.fecha_nacimiento.Year) < 18).ToList();
+                float porcentaje = CaluclarPorcentaje(fechas.Count(),total_pacientes);
+                return porcentaje;
+
+            }
+            static float Mostrar_porcentaje_jovenes(List<Farmacia> pacientes)
+            {
+                DateTime fecha_actual = DateTime.Today;
+
+                var total_pacientes = pacientes.Count();
+
+                var fechas = pacientes.Where(fecha => (fecha_actual.Year - fecha.fecha_nacimiento.Year) > 18 && (fecha_actual.Year - fecha.fecha_nacimiento.Year) < 30).ToList();
+                float porcentaje = CaluclarPorcentaje(fechas.Count(),total_pacientes);
+                return porcentaje;
+
+            }
+            static float Mostrar_porcentaje_adulto(List<Farmacia> pacientes)
+            {
+                DateTime fecha_actual = DateTime.Today;
+
+                var total_pacientes = pacientes.Count();
+
+                var fechas = pacientes.Where(fecha => (fecha_actual.Year - fecha.fecha_nacimiento.Year) > 30 && (fecha_actual.Year - fecha.fecha_nacimiento.Year) < 55).ToList();
+                float porcentaje = CaluclarPorcentaje(fechas.Count(),total_pacientes);
+                return porcentaje;
+
+            }
+            static float Mostrar_porcentaje_adultoMayor(List<Farmacia> pacientes)
+            {
+                DateTime fecha_actual = DateTime.Today;
+
+                var total_pacientes = pacientes.Count();
+
+                var fechas = pacientes.Where(fecha => (fecha_actual.Year - fecha.fecha_nacimiento.Year) > 55 && (fecha_actual.Year - fecha.fecha_nacimiento.Year) < 75).ToList();
+                float porcentaje = CaluclarPorcentaje(fechas.Count(),total_pacientes);
+                return porcentaje;
+
+            }
+            static float Mostrar_porcentaje_anciano(List<Farmacia> pacientes)
+            {
+                DateTime fecha_actual = DateTime.Today;
+
+                var total_pacientes = pacientes.Count();
+
+                var fechas = pacientes.Where(fecha => (fecha_actual.Year - fecha.fecha_nacimiento.Year) > 75).ToList();
+                float porcentaje = CaluclarPorcentaje(fechas.Count(),total_pacientes);
+                return porcentaje;
+
+            }
+
+
+
+
+
+
+            
+
+
+
+
+
+            // PORCENTAJES POR REGIMEN
+
+
+            static float Mostrar_porcentaje_contributivo(List<Farmacia> pacientes)
+            {
+                var total_regimen = pacientes.Where(x => x.regimen == "Contributivo" | x.regimen == "Subsidada").ToList();
+                float Tregimen = total_regimen.Count();
+                
+                var total_contributario = pacientes.Where(x => x.regimen == "Contributivo").ToList();
+                float Tcontributario = total_contributario.Count();
+
+                float porcentaje_contributario = CaluclarPorcentaje(Tcontributario, Tregimen);
+
+                return porcentaje_contributario;
+
+            }
+            static float Mostrar_porcentaje_subsidiado(List<Farmacia> pacientes)
+            {
+                var total_regimen = pacientes.Where(x => x.regimen == "Contributivo" | x.regimen == "Subsidiado").ToList();
+                float Tregimen = total_regimen.Count();
+
+                var total_Subsidiado = pacientes.Where(x => x.regimen == "Subsidiado").ToList();
+                float TSubsidiado = total_Subsidiado.Count();
+
+                float porcentaje_Subsidiado = CaluclarPorcentaje(TSubsidiado,Tregimen);
+
+                return porcentaje_Subsidiado;
+
+
+            }
+
+            
+
+
+
+
+            // PORCENTAJE DE AFILACION
+            static float Mostrar_porcentaje_cotizante(List<Farmacia> pacientes)
+            {
+               var total_afilacion = pacientes.Where(x => x.tipo_afiliacion == "cotizante" | x.tipo_afiliacion == "beneficiario").ToList();
+               float Tafilacion = total_afilacion.Count();
+
+               var total_cotizante = pacientes.Where(x => x.tipo_afiliacion == "cotizante").ToList() ;
+               float Tcotizante = total_cotizante.Count(); 
+
+               return CaluclarPorcentaje(Tcotizante,Tafilacion);
+
+            }
+            static float Mostrar_porcentaje_beneficiario(List<Farmacia> pacientes)
+            {
+                var total_afilacion = pacientes.Where(x => x.tipo_afiliacion == "cotizante" | x.tipo_afiliacion == "beneficiario").ToList();
+                float Tafilacion = total_afilacion.Count();
+
+                var total_beneficiario = pacientes.Where(x => x.tipo_afiliacion == "beneficiario").ToList();
+                float Tbeneficiario = total_beneficiario.Count();
+
+                return CaluclarPorcentaje(Tbeneficiario, Tafilacion);
+
+            }
+
+            
+
+
+            
+
+
+            
+            static void ingresarPaciente(List<Farmacia> pacientes)
+            {
+                string id, nombre, apellido, regimen, fecha_ingreso, fecha_ingreso_eps, eps, historia, cantidad_enfermedades, enfermedad_relevante, tipo_afiliacion;
+                int semanas_cotizadas, costos;
+                DateTime fecha_nacimiento;
+
+                Console.WriteLine("Ingrese su ID: ");
+                id = Console.ReadLine();
+                Console.WriteLine("Ingrese su nombre: ");
+                nombre = Console.ReadLine();
+                Console.WriteLine("ingrese su apellido");
+                apellido = Console.ReadLine();
+                Console.WriteLine("ingrese su fecha de nacimiento año/mes/dia ");
+                fecha_nacimiento = new DateTime();
+                Console.WriteLine("Elige regimen Contributivo o Subsidada");
+                regimen = Console.ReadLine();
+                Console.WriteLine("semanas cotizadas");
+                semanas_cotizadas = Convert.ToInt16(Console.ReadLine());
+                Console.WriteLine("ingrese su fecha de ingreso ");
+                fecha_ingreso = Console.ReadLine();
+                Console.WriteLine("ingrese su fecha de ingreso de la eps: ");
+                fecha_ingreso_eps = Console.ReadLine();
+                Console.WriteLine("Cual es su eps: sura o eps o salud total o sanitas o savia en minusculas");
+                eps = Console.ReadLine();
+                Console.WriteLine("Ingrese la historia clinica : ");
+                historia = Console.ReadLine();
+                Console.WriteLine("ingrese la cantidad de enfermedades: ");
+                cantidad_enfermedades = Console.ReadLine();
+                Console.WriteLine("Cual es su enfermedad relevante: ");
+                enfermedad_relevante = Console.ReadLine();
+                Console.WriteLine("Cual es su afilacion cotizantes o beneficiario en minusculas");
+                tipo_afiliacion = Console.ReadLine();
+                Console.WriteLine("Ingrese la cantidad de costos: ");
+                costos = int.Parse(Console.ReadLine());
+                Farmacia paciente = new Farmacia(id,nombre,apellido,fecha_nacimiento,regimen,semanas_cotizadas,fecha_ingreso,fecha_ingreso_eps,eps,historia,cantidad_enfermedades,enfermedad_relevante,tipo_afiliacion,costos);
+                pacientes.Add(paciente);
+
+
+
+            }
+
+            Boolean menu = true;
+            while(menu)
+            {
+                Console.WriteLine("Seleccione la opcion que desea: ");
+                Console.WriteLine("1. ingresar paciente \n 2. Mostrar estadisticas \n 3. salir");
+                int opcion = Convert.ToInt32(Console.ReadLine());
+
+                do
+                { 
+                    switch (opcion)
+                    {
+                        case 1:
+                            ingresarPaciente(pacientes);
+                            opcion = 3;
+                            break;
+
+                        case 2:
+
+                            Console.WriteLine("-Porcentajes por eps");
+                            Console.WriteLine("");
+                            Console.WriteLine("El porcentaje de los costos de sura son: "+Mostrar_porcentaje_sura(pacientes)+"%");
+                            Console.WriteLine("El porcentaje de los costos de eps son: " + Mostrar_porcentaje_eps(pacientes) + "%");
+                            Console.WriteLine("El porcentaje de los costos de salud total son: " + Mostrar_porcentaje_Salud_Total(pacientes) + "%");
+                            Console.WriteLine("El porcentaje de los costos de sanitas son: " + Mostrar_porcentaje_Sanitas(pacientes) + "%");
+                            Console.WriteLine("El porcentaje de los costos de savia son: " + Mostrar_porcentaje_Savia(pacientes) + "%");
+                            Console.WriteLine("");
+
+                            
+                            Console.WriteLine("-Total costos por eps");
+                            Console.WriteLine("");
+                            Console.WriteLine("Total de costos de Sura: " + Total_sura(pacientes));
+                            Console.WriteLine("Total de costos de eps: " + Total_eps(pacientes));
+                            Console.WriteLine("Total de costos de salud total: " + Total_Salud_Total(pacientes));
+                            Console.WriteLine("Total de costos de sanitas: " + Total_Sanitas(pacientes));
+                            Console.WriteLine("Total de costos de savia: " + Total_Savia(pacientes));
+                            Console.WriteLine("");
+                            
+                            
+                            Console.WriteLine("-Porcentaje sin enfermedades");
+                            Console.WriteLine("Pacientes sin enfermedades son; "+Mostrar_porcentaje_sin_enfermedades(pacientes));
+                            Console.WriteLine("");
+
+                            Console.WriteLine("-Mostrar paciente con mayor costo por eps:");
+                            Console.WriteLine("");
+                            Console.WriteLine("Costo mayor de sura: "+costo_mayor_sura(pacientes));
+                            Console.WriteLine("Costo mayor de eps: " + costo_mayor_eps(pacientes));
+                            Console.WriteLine("Costo mayor de salud total: " + costo_mayor_Salud_Total(pacientes));
+                            Console.WriteLine("Costo mayor de sanitas: " + costo_mayor_sanitas(pacientes));
+                            Console.WriteLine("Costo mayor de savia: " + costo_mayor_Savia(pacientes));
+                            Console.WriteLine("");
+
+
+                            Console.WriteLine("-Porcentaje por edades");
+                            Console.WriteLine("");
+                            Console.WriteLine("Porcentaje de la edad de niños: " + Mostrar_porcentaje_niños(pacientes) + "%");
+                            Console.WriteLine("Porcentaje de la edad de adolecentes: " + Mostrar_porcentaje_adolecentes(pacientes) + "%");
+                            Console.WriteLine("Porcentaje de la edad de jovenes: " + Mostrar_porcentaje_jovenes(pacientes) + "%");
+                            Console.WriteLine("Porcentaje de la edad de adultos: " + Mostrar_porcentaje_adulto(pacientes) + "%");
+                            Console.WriteLine("Porcentaje de la edad de adultoMayor: " + Mostrar_porcentaje_adultoMayor(pacientes) + "%");
+                            Console.WriteLine("Porcentaje de la edad de anciano: " + Mostrar_porcentaje_anciano(pacientes) + "%");
+                            Console.WriteLine("");
+
+
+                            Console.WriteLine("-Porcentaje por regimen");
+                            Console.WriteLine("");
+                            Console.WriteLine("porcentaje de subsidiados: " + Mostrar_porcentaje_subsidiado(pacientes) + "%");
+                            Console.WriteLine("porcentaje de contributivo: " + Mostrar_porcentaje_subsidiado(pacientes) + "%");
+                            Console.WriteLine("");
+
+
+                            Console.WriteLine("-porcentaje por afilacion");
+                            Console.WriteLine("");
+                            Console.WriteLine("porcentaje de cotizante: " + Mostrar_porcentaje_cotizante(pacientes) + "%");
+                            Console.WriteLine("porcentaje de beneficiario: " + Mostrar_porcentaje_beneficiario(pacientes) + "%");
+                            Console.WriteLine("");
+
+
+                            Console.WriteLine("-Enfermedad relevante cancer:");
+                            Console.WriteLine("");
+                            var enfermedad_cancer = pacientes.Where(x => x.enfermedad_relevante == "cancer").ToList();
+                            Console.WriteLine("\n Pacientes con la enfermedad mas relevante es el cancer :");
+                            foreach (Farmacia paciente in enfermedad_cancer)
+                            {
+                                Console.WriteLine("\tPacientes : {0} " + paciente.id + " " + paciente.nombre + " " + paciente.apellido);
+                            };
+                            opcion = 3;
+                            break;
+
+
+                    }
+
+
+                } while (opcion != 3);
+            }
+
+
+
+
+
+
+
+
+
+
+        }
+
+    }
+
+}
+
